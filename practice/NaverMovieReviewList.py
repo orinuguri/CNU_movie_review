@@ -18,18 +18,8 @@ for i, one in enumerate(review_list):
     score = one.select('div.star_score > em')[0].get_text()
 
     # 리뷰 정보 수집
-    review = one.select('div.score_reple > p > span')
+    review = one.select('div.score_reple > p > span')[-1].get_text().strip()
 
-
-    # if len(review) == 2:
-    #   review_text = review[1].get_text().strip()
-    # elif len(review) == 1:
-    #   review_text = review[0].get_text().strip()  >>> 아래 if 문과 같은 코드
-
-    j = 0
-    if len(review) == 2:    # +관람객
-        j = 1
-    review_text = review[j].get_text().strip()
 
     # 작성자 (닉네임) 정보 수집
     original_writer = one.select('div.score_reple dt em')[0].get_text().strip()
@@ -44,7 +34,7 @@ for i, one in enumerate(review_list):
     # yyyy.MM.dd 전처리 코드 생성
     date = original_date[:10]
 
-    print(':: REVIEW -> {}'.format(review_text))
+    print(':: REVIEW -> {}'.format(review))
     print(':: WRITER -> {}'.format(writer))
     print(':: SCORE -> {}'.format(score))
     print(':: DATE -> {}'.format(date))
